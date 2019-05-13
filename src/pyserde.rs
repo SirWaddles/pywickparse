@@ -286,8 +286,7 @@ impl<'p> ser::Serializer for Serializer<'p> {
     }
 
     fn serialize_none(self) -> PyserResult<PyObject> {
-        let val: Option<PyObject> = None;
-        Ok(val.to_py_object(self.p).into_object())
+        Ok(self.p.None())
     }
 
     fn serialize_some<T>(self, value: &T) -> PyserResult<PyObject>
@@ -297,13 +296,11 @@ impl<'p> ser::Serializer for Serializer<'p> {
     }
 
     fn serialize_unit(self) -> PyserResult<PyObject> {
-        let val: Option<PyObject> = None;
-        Ok(val.to_py_object(self.p).into_object())
+        Ok(self.p.None())
     }
 
     fn serialize_unit_struct(self, _name: &'static str) -> PyserResult<PyObject> {
-        let val: Option<PyObject> = None;
-        Ok(val.to_py_object(self.p).into_object())
+        Ok(self.p.None())
     }
 
     fn serialize_unit_variant(

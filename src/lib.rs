@@ -3,13 +3,14 @@ extern crate john_wick_parse;
 
 mod pyserde;
 
-use cpython::{PyResult, PyObject, PyErr, Python};
+use cpython::{PyResult, PyObject, PyList, PyErr, Python, ToPyObject, PythonObject};
 use john_wick_parse::{assets, read_texture as read_texture_asset};
-use john_wick_parse::archives::PakExtractor;
+use john_wick_parse::archives::PakExtractor as NativeExtractor;
 
 py_module_initializer!(pywick, initpywick, PyInit_pywick, |py, m| {
     m.add(py, "__doc__", "Python Bindings for the JohnWickParse library")?;
     m.add(py, "read_asset", py_fn!(py, read_asset(asset_path: String)))?;
+    m.add_class::<PakExtractor>(py)?;
     Ok(())
 });
 
@@ -30,3 +31,20 @@ fn read_asset(p: Python, asset_path: String) -> PyResult<PyObject> {
 
     Ok(asset)
 }
+
+py_class!(class PakExtractor |py| {
+    data extract: NativeExtractor;
+
+    def __new__(_cls, path: String, key: String) -> PyResult<PakExtractor> {
+        let extractor = match NativeExtractor::new(&path, &key) {
+            Ok(data) => data,
+            Err(err) => return custom_err(py, format!("Error loading pak file: {}", err)),
+        };
+        PakExtractor::create_instance(py, extractor)
+    }
+
+    def get_file_list(&self) -> PyResult<PyList> {
+        let filenames: Vec<PyObject> = self.extract(py).get_entries().into_iter().map(|v| v.get_filename().to_owned().to_py_object(py).into_object()).collect();
+        Ok(PyList::new(py, &filenames[..]))
+    }
+});
