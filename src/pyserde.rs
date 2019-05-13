@@ -150,7 +150,7 @@ impl<'p> ser::SerializeMap for MapSerializer<'p> {
         where T: ?Sized + Serialize
     {
         let value_obj = to_value(self.p, value)?;
-        self.keys.push(value_obj);
+        self.values.push(value_obj);
         Ok(())
     }
 

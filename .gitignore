@@ -1,2 +1,5 @@
 /target
 **/*.rs.bk
+test/pywick.pyd
+test/test.uasset
+test/test.uexp
