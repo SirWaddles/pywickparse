@@ -1,4 +1,4 @@
-import pywick
+import pywickparse
 
 extractor = pywick.PakExtractor("pakchunk.pak", "0000000000000000000000000000000000000000000000000000000000000000")
 files = extractor.get_file_list()

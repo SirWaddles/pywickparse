@@ -7,7 +7,7 @@ Python Bindings for the JohnWickParse library
 The `PakExtractor` class is used to extract files from a .pak, and it's use is pretty basic.
 
 ```python
-import pywick
+import pywickparse
 
 # Make a new PakExtractor by specifying the pak file and the key (in hex)
 extractor = pywick.PakExtractor("pakchunk.pak", "0000000000000000000000000000000000000000000000000000000000000000")
