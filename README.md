@@ -10,7 +10,7 @@ The `PakExtractor` class is used to extract files from a .pak, and it's use is p
 import pywickparse
 
 # Make a new PakExtractor by specifying the pak file and the key (in hex)
-extractor = pywick.PakExtractor("pakchunk.pak", "0000000000000000000000000000000000000000000000000000000000000000")
+extractor = pywickparse.PakExtractor("pakchunk.pak", "0000000000000000000000000000000000000000000000000000000000000000")
 # get_file_list returns a List of filenames as strings, as they're represented in the pak
 files = extractor.get_file_list()
 # Use the index of the above list, to retrieve the bytes of a file
