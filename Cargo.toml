@@ -1,5 +1,5 @@
 [package]
-name = "pywick"
+name = "pywickparse"
 version = "0.1.0"
 authors = ["Waddlesworth <github@genj.io>"]
 edition = "2018"
