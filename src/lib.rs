@@ -10,7 +10,7 @@ use cpython::{PyResult, PyObject, PyBytes, PyString, PyList, PyErr, Python, ToPy
 use john_wick_parse::{assets, read_texture as read_texture_asset};
 use john_wick_parse::archives::PakExtractor as NativeExtractor;
 
-py_module_initializer!(pywick, initpywick, PyInit_pywick, |py, m| {
+py_module_initializer!(pywickparse, initpywickparse, PyInit_pywickparse, |py, m| {
     m.add(py, "__doc__", "Python Bindings for the JohnWickParse library")?;
     m.add(py, "read_asset", py_fn!(py, read_asset(asset_path: String)))?;
     m.add(py, "read_texture", py_fn!(py, read_texture_to_file(asset_path: String, texture_path: String)))?;
